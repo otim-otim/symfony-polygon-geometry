@@ -9,7 +9,7 @@ use App\Entity\Triangle;
 
 class TriangleController extends AbstractController
 {
-    #[Route('/triangle/{a}/{b}/{c}', name: 'app_triangle')]
+    #[Route('/triangle/{side1}/{side2}/{side3}', name: 'app_triangle')]
     public function show($side1, $side2, $side3): JsonResponse
     {
         $triangle = new Triangle($side1, $side2, $side3);
