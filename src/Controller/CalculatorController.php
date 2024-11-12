@@ -14,14 +14,35 @@ class CalculatorController extends AbstractController
    
     public function sum_shape_contexts($context, $shape1, $shape1dimensions, $shape2, $shape2dimensions): JsonResponse
     {
-        $polygon_service = new PolygonService();
-        $polygon1 = 
-        switch($context) {
-            case 'area':
+        try {
+            //code...
+            $polygon_service = new PolygonService();
+            $polygon1 = $polygon_service->generatePolygon($shape1, $shape1dimensions);
+            $polygon2 = $polygon_service->generatePolygon($shape2, $shape2dimensions);
+            switch($context) {
+                case 'area':
+                    $result = $polygon_service->sumSurfaceAreas($polygon1, $polygon2);
+                    break;
+                case 'circumference':
+                    $result = $polygon_service->sumCircumferences($polygon1, $polygon2);
+                    break;
+                default:
+                    $result = null;
+                    break;
+            }
+            return $this->json([
+                'result' => $result
+            ]);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $this->json([
+                'error' => '$th->getMessage()'
+            ], $th->getCode());
+        }
 
     }
 
-    public function getPolygon
+    
 
 
 }
