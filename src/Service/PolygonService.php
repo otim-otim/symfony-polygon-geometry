@@ -7,18 +7,14 @@ use App\Entity\Triangle;
 use Geometry\Polygon;
 
 class PolygonService{
-    public $area;
-    public $perimeter;
-    public function __construct(public Polygon $polygon1, public Polygon $polygon2){
+    
 
+    public function sumSurfaceAreas(Polygon $polygon1,Polygon $polygon2){
+        return $polygon1->calculateSurfaceArea() + $polygon2->calculateSurfaceArea();
     }
 
-    public function sumSurfaceAreas(){
-        return $this->polygon1->calculateSurfaceArea() + $this->polygon2->calculateSurfaceArea();
-    }
-
-    public function sumCircumferences(){
-        return $this->polygon1->calculateCircumference() + $this->polygon2->calculateCircumference();
+    public function sumCircumferences(Polygon $polygon1,Polygon $polygon2){
+        return $polygon1->calculateCircumference() + $polygon2->calculateCircumference();
     }
 
     /**
